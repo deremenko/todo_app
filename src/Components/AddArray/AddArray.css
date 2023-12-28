@@ -1,0 +1,15 @@
+.task-form {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  width: 50%;
+}
+
+.task-form__to-do-item {
+  padding: 10px;
+  border: 2px solid rgb(48, 166, 202);
+  margin: 10px 0px 0px;
+  border-radius: 20px;
+  width: 80%;
+  min-height: 15px;
+}
