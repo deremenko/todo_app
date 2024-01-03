@@ -1,0 +1,23 @@
+.item-box {
+  display: flex;
+  align-items: center;
+  width: 90%;
+  min-height: 120px;
+  margin: 20px 0px;
+  box-shadow: 19px 20px 14px rgba(0, 0, 0, 0.14);
+  border: 1px solid rgba(0, 0, 0, 0.14);
+  transition: box-shadow 0.5s ease;
+}
+
+.item-box:hover {
+  box-shadow: 19px 20px 14px rgba(0, 0, 0, 0.527);
+}
+
+.item-box__text-task {
+  width: 80%;
+}
+
+.item-box__checkbox {
+  width: 5%;
+  margin: 0px 10px 0px 0px;
+}
