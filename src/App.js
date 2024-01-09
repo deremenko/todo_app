@@ -10,17 +10,22 @@ class App extends Component {
     };
   }
 
+  generateUniqueId() {
+    return Date.now().toString(36) + Math.random().toString(36).substr(2);
+  }
+  
   componentDidMount() {
 // Тестовый фрагмент для тестирования пока, пока не готова функция добавления новых тасков 
     const initialTodoTask = [
-      { id: 1, text: 'Задача 1', completed: false },
-      { id: 2, text: 'Задача 2', completed: true },
-      { id: 3, text: 'Задача 3', completed: false },
-      { id: 4, text: 'Задача 4', completed: true },
-      { id: 5, text: 'Задача 5', completed: true },
-      { id: 6, text: 'Задача 6', completed: true },
-      { id: 7, text: 'Задача 7', completed: true },
+      { id: this.generateUniqueId(), text: 'Задача 1', completed: false },
+      { id: this.generateUniqueId(), text: 'Задача 2', completed: true },
+      { id: this.generateUniqueId(), text: 'Задача 3', completed: false },
+      { id: this.generateUniqueId(), text: 'Задача 4', completed: true },
+      { id: this.generateUniqueId(), text: 'Задача 5', completed: true },
+      { id: this.generateUniqueId(), text: 'Задача 6', completed: true },
+      { id: this.generateUniqueId(), text: 'Задача 7', completed: true },
     ];
+    console.log(initialTodoTask);
 // Конец текстового фрагмента
     this.setState({ todoTask: initialTodoTask });
     localStorage.setItem('todoTask', JSON.stringify(initialTodoTask));    
