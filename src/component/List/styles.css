@@ -1,0 +1,9 @@
+.section-task-list {
+  margin: 10px 0px 0px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-sizing: border-box;
+  min-height: 720px ;
+  box-shadow: 0px 0px 14px rgba(0, 0, 0, 0.14);
+}
