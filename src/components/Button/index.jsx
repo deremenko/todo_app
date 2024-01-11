@@ -3,7 +3,6 @@ import SvgImg from '../SvgImg/index.jsx';
 import './styles.css';
 
 class Button extends Component {
-
   render() {
     return (
       <div className="button">

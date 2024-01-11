@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import List from '../List/index.jsx';
 import crossIcon from '../../svg/Cross.svg';
-import './styles.css';
 import { initialTodoTask } from '../../constants .js';
+import './styles.css';
 
 
 class Todo extends Component {

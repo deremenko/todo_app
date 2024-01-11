@@ -5,7 +5,6 @@ import Text from '../Text';
 import './styles.css';
 
 class Item extends Component {
-
   render() {
     return (
       <div className="item">
