@@ -1,11 +1,12 @@
-.box-button {
+.button {
   display: flex;
   justify-content: center;
   align-items: center;
+  min-width: 45px;
   width: 15%;
 }
 
-button {
+.button__main-body {
   display: flex;
   justify-content: center;
   align-items: center;

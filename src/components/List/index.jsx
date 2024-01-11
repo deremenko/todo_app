@@ -5,9 +5,9 @@ import './styles.css';
 class List extends Component {
   render() {
     return (
-      <div className='list'>
+      <div className="list">
         {this.props.tasks.map((item) => (
-          <Item key={item.id} text = {item.text} checked = {item.completed} crossIcon = {this.props.crossIcon}/>
+          <Item key={item.id} text = {item.text} checked = {item.completed} Icon = {this.props.Icon} alt = {this.props.alt}/>
         ))}
       </div>
     );

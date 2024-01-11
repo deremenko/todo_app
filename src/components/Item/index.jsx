@@ -8,10 +8,10 @@ class Item extends Component {
 
   render() {
     return (
-      <div className='item'>
+      <div className="item">
         <Checkbox checked = {this.props.checked} />
         <Text text = {this.props.text} />
-        <Button crossIcon = {this.props.crossIcon} />
+        <Button Icon = {this.props.Icon} alt = {this.props.alt}/>
       </div>
     );
   }
