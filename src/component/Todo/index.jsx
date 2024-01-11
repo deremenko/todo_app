@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import './styles.css';
 import List from '../List/index.jsx';
 import crossIcon from '../../svg/Cross.svg';
+import './styles.css';
 const { initialTodoTask } = require('../../const/const.js');
+
 
 class Todo extends Component {
   constructor(props) {
