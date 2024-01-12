@@ -15,4 +15,5 @@
   height: 45px;
   box-shadow: 0px 0px 3px rgb(0 0 0 / 24%);
   font-size: large;
+  cursor: pointer;
 }

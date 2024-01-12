@@ -5,7 +5,7 @@ class Button extends Component {
   render() {
     return (
       <div className="button">
-        <button className="button__main-body">
+        <button onClick={this.props.clickButton} className="button__main-body">
           <img src={this.props.Icon} alt={this.props.alt} />
           <span>{this.props.buttonText}</span>
         </button>
