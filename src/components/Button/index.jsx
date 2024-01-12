@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import SvgImg from '../SvgImg/index.jsx';
 import './styles.css';
 
 class Button extends Component {
@@ -7,7 +6,8 @@ class Button extends Component {
     return (
       <div className="button">
         <button className="button__main-body">
-          <SvgImg Icon={this.props.Icon} alt = {this.props.alt}/>
+          <img src={this.props.Icon} alt={this.props.alt} />
+          <span>{this.props.buttonText}</span>
         </button>
       </div>
     );

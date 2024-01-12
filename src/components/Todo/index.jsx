@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
-import List from '../List/index.jsx';
-import crossIcon from '../../svg/Cross.svg';
-import { initialTodoTask } from '../../constants .js';
+import TaskList from '../TaskList';
+import { initialTodoTask } from '../../constants.js';
 import './styles.css';
-
 
 class Todo extends Component {
   constructor(props) {
@@ -22,7 +20,7 @@ class Todo extends Component {
   render() {
     return (
       <div className="todo">
-        <List tasks = {this.state.tasks} Icon = {crossIcon} alt = {"Cross"}/>
+        <TaskList tasks={this.state.tasks} />
       </div>
     );
   }
