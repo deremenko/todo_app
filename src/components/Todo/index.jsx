@@ -12,6 +12,17 @@ class Todo extends Component {
       checked: false
     };
   }
+
+  deletTask = (dataOfChildComponents) => {
+    let tasks = this.state.tasks;
+    tasks = tasks.filter((item) => {
+      return item.id !== dataOfChildComponents;
+    })
+
+    localStorage.setItem('tasks', JSON.stringify(tasks)); 
+    this.setState({ tasks })
+  }
+
   
   componentDidMount() {
     localStorage.setItem("tasks", JSON.stringify(initialTodoTask));    
@@ -20,7 +31,7 @@ class Todo extends Component {
   render() {
     return (
       <div className="todo">
-        <TaskList tasks={this.state.tasks} />
+        <TaskList tasks={this.state.tasks} handlerDeleteButton={this.deletTask} />
       </div>
     );
   }

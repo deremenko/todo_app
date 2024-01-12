@@ -11,6 +11,8 @@ class TaskList extends Component {
             key={task.id} 
             text={task.text} 
             checked={task.completed}
+            handlerDeleteButton={this.props.handlerDeleteButton}
+            id={task.id}
           />
         ))}
       </div>
