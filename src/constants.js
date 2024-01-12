@@ -1,4 +1,4 @@
-import { generateUniqueId } from './helpers/script.js';
+import { generateUniqueId } from './helpers/generateUniqueId.js';
 
 export const initialTodoTask = [
   { id: generateUniqueId(), 

@@ -5,10 +5,13 @@ import './styles.css';
 class TaskList extends Component {
   render() {
     return (
-      <div className="TaskList">
+      <div className="taskList">
         {this.props.tasks.map((task) => (
-          <Task key={task.id} text={task.text} 
-           checked={task.completed}/>
+          <Task 
+            key={task.id} 
+            text={task.text} 
+            checked={task.completed}
+          />
         ))}
       </div>
     );

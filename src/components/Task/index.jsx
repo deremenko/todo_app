@@ -6,11 +6,14 @@ import './styles.css';
 class Task extends Component {
   render() {
     return (
-      <div className="Task">
-        <input type="checkbox" checked={this.props.checked} 
-          className="Task__checkbox" />
-        <p className="Task__text" > {this.props.text} </p>
-        <Button Icon={crossIcon} alt={"Cross"} />
+      <div className="task">
+        <input 
+          type="checkbox" 
+          checked={this.props.checked} 
+          className="task__checkbox" 
+        />
+        <p className="task__text" > {this.props.text} </p>
+        <Button icon={crossIcon} alt="Cross" />
       </div>
     );
   }
