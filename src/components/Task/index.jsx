@@ -13,7 +13,12 @@ class Task extends Component {
           className="task__checkbox" 
         />
         <p className="task__text" > {this.props.text} </p>
-        <Button icon={crossIcon} alt="Cross" />
+        <Button 
+          icon={crossIcon} 
+          alt="Cross" 
+          clickButton={this.props.handlerDeleteButton}
+          id={this.props.id}
+        />
       </div>
     );
   }
