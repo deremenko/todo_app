@@ -1,20 +1,23 @@
 import React, { Component } from 'react';
 import TaskList from '../TaskList';
 import { initialTodoTask } from '../../constants.js';
+import { sortArray } from '../../helpers/sortArray.js';
 import './styles.css';
 
 class Todo extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      tasks: initialTodoTask,
+      tasks: [],
       text : '',
       checked: false
     };
   }
   
   componentDidMount() {
-    localStorage.setItem("tasks", JSON.stringify(initialTodoTask));    
+    const tasks = sortArray(initialTodoTask);
+    localStorage.setItem("tasks", JSON.stringify(tasks));  
+    this.setState({ tasks });  
   }
 
   render() {
