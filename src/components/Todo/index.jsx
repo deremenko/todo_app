@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import TaskList from '../TaskList';
 import { initialTodoTask } from '../../constants.js';
-import { sortTaskArray } from '../../helpers/sortTaskArray.js';
+import { sortArray } from '../../helpers/sortArray.js';
 import './styles.css';
 
 class Todo extends Component {
@@ -15,9 +15,9 @@ class Todo extends Component {
   }
   
   componentDidMount() {
-    const tasks = sortTaskArray(initialTodoTask);
+    const tasks = sortArray(initialTodoTask);
     localStorage.setItem("tasks", JSON.stringify(tasks));  
-    this.setState({tasks: tasks});  
+    this.setState({ tasks });  
   }
 
   render() {
