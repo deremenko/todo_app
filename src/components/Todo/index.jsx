@@ -20,13 +20,12 @@ class Todo extends Component {
 
   addTask = (event) => {
     event.preventDefault();
-    this.setState({showError : false})
+    this.setState({ showError : false })
     const tasks = this.state.tasks;
     const validateText = validateInput(this.state.text)
     
     if (!validateText) {
-      this.setState({showError: true});
-      this.clearInput()
+      this.setState({ showError: true, text: '' });
       return; 
     }
 
@@ -37,17 +36,12 @@ class Todo extends Component {
     });
 
     localStorage.setItem('tasks', JSON.stringify(tasks));
-    this.setState({ tasks});
-    this.clearInput()
+    this.setState({ tasks: tasks, text: '' });
   };
 
   handleChange = (event) => {
     this.setState({ text: event.target.value });
   };
-
-  clearInput() {
-    return this.setState({ text: '' });
-  }
 
   componentDidMount() {
     localStorage.setItem('tasks', JSON.stringify(initialTodoTask));
@@ -56,7 +50,11 @@ class Todo extends Component {
   render() {
     return (
       <div className="todo">
-        <AddTaskForm addTask={this.addTask} handleChange={this.handleChange} clearInput={this.state.text}/>
+        <AddTaskForm 
+          addTask={this.addTask} 
+          handleChange={this.handleChange} 
+          clearInput={this.state.text}
+        />
         {this.state.showError && (
           <ErrorMessage message="Пожалуйста, введите корректные данные." />
         )}

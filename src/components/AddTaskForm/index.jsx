@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Button from '../Button';
-import addTask from '../../svg/Add.svg';
+import checkMark from '../../svg/CheckMark.svg';
 import './styles.css';
 
 class AddTaskForm extends Component {
@@ -13,7 +13,7 @@ class AddTaskForm extends Component {
           onChange={(event) => {this.props.handleChange(event);}}
           className="addTaskForm__inputLine"
         />
-        <Button icon={addTask} alt="pen"/>
+        <Button icon={checkMark} alt="Check mark"/>
       </form>
     );
   }

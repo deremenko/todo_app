@@ -4,7 +4,7 @@ import './styles.css';
 class ErrorMessage extends Component {
   render() {
     return (
-      <p className="ErrorMessage">
+      <p className="errorMessage">
         {this.props.message}
       </p>
     );
