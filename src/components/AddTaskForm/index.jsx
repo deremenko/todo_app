@@ -9,8 +9,8 @@ class AddTaskForm extends Component {
       <form className="addTaskForm" onSubmit={(event) => {this.props.addTask(event)}}>
         <input 
           type="text" 
-          value={this.props.clearInput}
-          onChange={(event) => {this.props.handleChange(event)}}
+          value={this.props.text}
+          onChange={(event) => {this.props.handleChange(event, "text")}}
           className="addTaskForm__inputLine"
         />
         <Button icon={checkMark} alt="Check mark"/>

@@ -13,17 +13,20 @@ class Todo extends Component {
     this.state = {
       tasks: initialTodoTask,
       text : '',
+      editedText: '',
       checked: false,
       showError : false,
+      isEditingTask: false,
+      editingTaskId: null,
       textError: ''
     };
   }
 
   addTask = (event) => {
     event.preventDefault();
-    this.setState({ showError : false })
+    this.setState({ showError : false });
     const tasks = this.state.tasks;
-    const validateText = validateInput(this.state.text)
+    const validateText = validateInput(this.state.text);
     
     if (!validateText) {
       this.setState({ showError: true });
@@ -40,13 +43,48 @@ class Todo extends Component {
     this.setState({ tasks: tasks, text: '' });
   };
 
-  handleChange = (event) => {
-    this.setState({ text: event.target.value });
+  handleChange = (event, text) => {
+    this.setState({[text]: event.target.value });
   };
+
+  stopChangeMode = () => {
+    this.setState({ isEditingTask: false, editingTaskId: null });
+  };
+
+  onClickEditButton = (id, initialText) => {
+    this.setState({ isEditingTask: true, editingTaskId: id, editedText: initialText  });
+  };
+
+  onInputKeyDownHandler = (event, id) => {
+    switch (event.key) {
+      case "Escape": 
+        this.setState({ isEditingTask: false });
+        break;
+      case "Enter": 
+        this.changeTaskText(this.state.editedText, id);
+        this.setState({ isEditingTask: false });
+        break;
+    }
+  };
+
+  changeTaskText = (newText, idTask) => {
+    const validateText = validateInput(newText);
+    if (!validateText) return;
+    let tasks = [...this.state.tasks];
+    const index = tasks.findIndex(item => item.id === idTask);
+
+    tasks[index] = {
+      ...tasks[index], 
+      text: validateText, 
+    };
+
+    localStorage.setItem('tasks', JSON.stringify(tasks)); 
+    this.setState({ tasks });
+  }
 
   componentDidMount() {
     localStorage.setItem('tasks', JSON.stringify(initialTodoTask));
-    this.setState({ textError: "Пожалуйста, введите корректные данные." })
+    this.setState({ textError: "Пожалуйста, введите корректные данные." });
   }
 
   render() {
@@ -55,12 +93,23 @@ class Todo extends Component {
         <AddTaskForm 
           addTask={this.addTask} 
           handleChange={this.handleChange} 
-          clearInput={this.state.text}
+          text={this.state.text}
+          editingTaskId={this.state.editingTaskId}
         />
         {this.state.showError && (
           <ErrorMessage message={this.state.textError} />
         )}
-        <TaskList tasks={this.state.tasks} />
+        <TaskList 
+          tasks={this.state.tasks} 
+          changeTaskText={this.changeTaskText}
+          handleChange={this.handleChange}  
+          stopChangeMode={this.stopChangeMode} 
+          onClickEditButton={this.onClickEditButton}
+          onInputKeyDownHandler={this.onInputKeyDownHandler}
+          isEditingTask={this.state.isEditingTask}
+          editingTaskId={this.state.editingTaskId}
+          editedText={this.state.editedText}
+        />
       </div>
     );
   }

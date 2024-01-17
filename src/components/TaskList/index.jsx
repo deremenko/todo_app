@@ -8,9 +8,18 @@ class TaskList extends Component {
       <div className="taskList">
         {this.props.tasks.map((task) => (
           <Task 
-            key={task.id} 
+            key={task.id}
+            id={task.id} 
             text={task.text} 
             checked={task.completed}
+            changeTaskText = {this.props.changeTaskText}
+            handleChange={this.props.handleChange} 
+            stopChangeMode={this.props.stopChangeMode}
+            onClickEditButton={this.props.onClickEditButton}
+            onInputKeyDownHandler={this.props.onInputKeyDownHandler}
+            isEditingTask={this.props.isEditingTask}
+            editingTaskId={this.props.editingTaskId}
+            editedText={this.props.editedText}
           />
         ))}
       </div>
