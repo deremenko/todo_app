@@ -6,7 +6,7 @@
   width: 15%;
 }
 
-.button__main-body {
+.button__body {
   display: flex;
   justify-content: center;
   align-items: center;
