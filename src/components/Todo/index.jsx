@@ -14,7 +14,8 @@ class Todo extends Component {
       tasks: initialTodoTask,
       text : '',
       checked: false,
-      showError : false
+      showError : false,
+      textError: ''
     };
   }
 
@@ -25,7 +26,7 @@ class Todo extends Component {
     const validateText = validateInput(this.state.text)
     
     if (!validateText) {
-      this.setState({ showError: true, text: '' });
+      this.setState({ showError: true });
       return; 
     }
 
@@ -45,6 +46,7 @@ class Todo extends Component {
 
   componentDidMount() {
     localStorage.setItem('tasks', JSON.stringify(initialTodoTask));
+    this.setState({ textError: "Пожалуйста, введите корректные данные." })
   }
 
   render() {
@@ -56,9 +58,9 @@ class Todo extends Component {
           clearInput={this.state.text}
         />
         {this.state.showError && (
-          <ErrorMessage message="Пожалуйста, введите корректные данные." />
+          <ErrorMessage message={this.state.textError} />
         )}
-        <TaskList tasks={this.state.tasks}/>
+        <TaskList tasks={this.state.tasks} />
       </div>
     );
   }
