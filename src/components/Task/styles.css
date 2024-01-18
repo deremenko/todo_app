@@ -19,6 +19,8 @@
   padding: 0px 0px 0px 10px;
   flex-grow: 1;
   min-height: 60px;
+  word-wrap: break-word;
+  word-break:break-all;
 }
 
 .task__text:hover {

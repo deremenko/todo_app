@@ -9,9 +9,7 @@ class TaskList extends Component {
         {this.props.tasks.map((task) => (
           <Task 
             key={task.id}
-            id={task.id} 
-            text={task.text} 
-            checked={task.completed}
+            task={task}
             changeTaskText = {this.props.changeTaskText}
             handleChange={this.props.handleChange} 
             stopChangeMode={this.props.stopChangeMode}

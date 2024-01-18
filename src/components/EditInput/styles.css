@@ -1,0 +1,7 @@
+.editInput {
+  display: flex;
+  align-items: center;
+  padding: 0px 0px 0px 10px;
+  flex-grow: 1;
+  min-height: 60px;
+}
