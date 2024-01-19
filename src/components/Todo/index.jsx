@@ -63,6 +63,16 @@ class Todo extends Component {
     this.setState({ tasks });
   }
 
+  deleteTask = (idTask) => {
+    let tasks = [...this.state.tasks];
+    tasks = tasks.filter((task) => {
+      return task.id !== idTask;
+    })
+
+    localStorage.setItem('tasks', JSON.stringify(tasks)); 
+    this.setState({ tasks })
+  }
+
   handleChange = (event, key) => {
     this.setState({[key]: event.target.value });
   };
@@ -114,6 +124,7 @@ class Todo extends Component {
         )}
         <TaskList 
           tasks={this.state.tasks} 
+          deleteTask={this.deleteTask}
           handleChange={this.handleChange}  
           stopChangeMode={this.stopChangeMode} 
           onClickEditButton={this.onClickEditButton}

@@ -24,6 +24,7 @@ class TaskList extends Component {
               <Task 
                 key={task.id}
                 task={task}
+                deleteTask={this.props.deleteTask}
                 changeTaskText={this.props.changeTaskText}
                 handleChange={this.props.handleChange} 
                 stopChangeMode={this.props.stopChangeMode}
