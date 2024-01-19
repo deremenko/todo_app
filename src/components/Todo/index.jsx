@@ -75,6 +75,13 @@ class Todo extends Component {
     this.setState({ tasks });
   }
 
+  deleteAllTask = (event) => {
+    event.preventDefault();
+    let tasks = [...[]];
+    localStorage.setItem('tasks', JSON.stringify(tasks)); 
+    this.setState({ tasks });
+  }
+
   handleChangeCheckbox = (idTask) => {
     let tasks = [...this.state.tasks];
     const indexTask = tasks.findIndex(item => item.id === idTask);
@@ -132,7 +139,8 @@ class Todo extends Component {
       <div className="todo">
         <AddTaskForm 
           addTask={this.addTask} 
-          handleChange={this.handleChange} 
+          handleChange={this.handleChange}
+          deleteAllTask={this.deleteAllTask} 
           text={this.state.text}
           editingTaskId={this.state.editingTaskId}
         />
