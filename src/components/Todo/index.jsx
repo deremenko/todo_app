@@ -5,13 +5,14 @@ import ErrorMessage from '../ErrorMessage';
 import { initialTodoTask } from '../../constants.js';
 import { generateUniqueId } from '../../helpers/generateUniqueId.js';
 import { validateInput } from '../../helpers/validateInput.js';
+import { sortArray } from '../../helpers/sortArray.js';
 import './styles.css';
 
 class Todo extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      tasks: initialTodoTask,
+      tasks: [],
       text : '',
       editedText: '',
       checked: false,
@@ -25,7 +26,7 @@ class Todo extends Component {
   addTask = (event) => {
     event.preventDefault();
     this.setState({ showError : false, editingTaskId: null });
-    const tasks = this.state.tasks;
+    let tasks = this.state.tasks;
     const validateText = validateInput(this.state.text);
     
     if (!validateText) {
@@ -39,6 +40,7 @@ class Todo extends Component {
       completed: false,
     });
 
+    tasks = sortArray(tasks);
     localStorage.setItem('tasks', JSON.stringify(tasks));
     this.setState({ tasks: tasks, text: '' });
   };
@@ -81,7 +83,7 @@ class Todo extends Component {
       ...tasks[indexTask], 
       completed: !tasks[indexTask].completed, 
     };
-
+    tasks = sortArray(tasks);
     localStorage.setItem('tasks', JSON.stringify(tasks)); 
     this.setState({ tasks });
   };
@@ -120,7 +122,9 @@ class Todo extends Component {
   };
 
   componentDidMount() {
+    const tasks = sortArray(initialTodoTask);
     localStorage.setItem('tasks', JSON.stringify(initialTodoTask));
+    this.setState({ tasks });  
   }
 
   render() {
