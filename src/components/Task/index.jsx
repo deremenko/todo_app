@@ -9,7 +9,8 @@ class Task extends Component {
     return (
       <div className="task">
         <input 
-          type='checkbox' 
+          type='checkbox'
+          onChange={() => {this.props.handleChangeCheckbox(this.props.task.id)}}
           checked = {this.props.task.completed} 
           className='task__checkbox'>
         </input>

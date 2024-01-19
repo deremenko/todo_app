@@ -70,8 +70,21 @@ class Todo extends Component {
     })
 
     localStorage.setItem('tasks', JSON.stringify(tasks)); 
-    this.setState({ tasks })
+    this.setState({ tasks });
   }
+
+  handleChangeCheckbox = (idTask) => {
+    let tasks = [...this.state.tasks];
+    const indexTask = tasks.findIndex(item => item.id === idTask);
+
+    tasks[indexTask] = {
+      ...tasks[indexTask], 
+      completed: !tasks[indexTask].completed, 
+    };
+
+    localStorage.setItem('tasks', JSON.stringify(tasks)); 
+    this.setState({ tasks });
+  };
 
   handleChange = (event, key) => {
     this.setState({[key]: event.target.value });
@@ -125,7 +138,8 @@ class Todo extends Component {
         <TaskList 
           tasks={this.state.tasks} 
           deleteTask={this.deleteTask}
-          handleChange={this.handleChange}  
+          handleChange={this.handleChange} 
+          handleChangeCheckbox={this.handleChangeCheckbox} 
           stopChangeMode={this.stopChangeMode} 
           onClickEditButton={this.onClickEditButton}
           onInputKeyDownHandler={this.onInputKeyDownHandler}

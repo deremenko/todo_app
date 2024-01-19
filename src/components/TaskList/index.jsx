@@ -27,6 +27,7 @@ class TaskList extends Component {
                 deleteTask={this.props.deleteTask}
                 changeTaskText={this.props.changeTaskText}
                 handleChange={this.props.handleChange} 
+                handleChangeCheckbox={this.props.handleChangeCheckbox}
                 stopChangeMode={this.props.stopChangeMode}
                 onClickEditButton={this.props.onClickEditButton}
                 onInputKeyDownHandler={this.props.onInputKeyDownHandler}
