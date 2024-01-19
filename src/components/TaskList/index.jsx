@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import Task from '../Task';
+import EditInput from '../EditInput';
+import ErrorMessage from '../ErrorMessage';
 import './styles.css';
 
 class TaskList extends Component {
@@ -7,22 +9,39 @@ class TaskList extends Component {
     return (
       <div className="taskList">
         {this.props.tasks.map((task) => (
-          <Task 
-            key={task.id}
-            task={task}
-            changeTaskText = {this.props.changeTaskText}
-            handleChange={this.props.handleChange} 
-            stopChangeMode={this.props.stopChangeMode}
-            onClickEditButton={this.props.onClickEditButton}
-            onInputKeyDownHandler={this.props.onInputKeyDownHandler}
-            isEditingTask={this.props.isEditingTask}
-            editingTaskId={this.props.editingTaskId}
-            editedText={this.props.editedText}
-          />
+          <div key={task.id} className='taskList__block'>
+            {this.props.isEditingTask && task.id === this.props.editingTaskId ? (
+              <EditInput
+                id={task.id}
+                editedText={this.props.editedText}
+                handleChange={this.props.handleChange} 
+                onInputKeyDownHandler={this.props.onInputKeyDownHandler}
+                stopChangeMode={this.props.stopChangeMode}
+                onClickEditConfir={this.props.onClickEditConfir}
+                onClickEditCancel={this.props.onClickEditCancel}
+              />
+            ) : (
+              <Task 
+                key={task.id}
+                task={task}
+                changeTaskText={this.props.changeTaskText}
+                handleChange={this.props.handleChange} 
+                stopChangeMode={this.props.stopChangeMode}
+                onClickEditButton={this.props.onClickEditButton}
+                onInputKeyDownHandler={this.props.onInputKeyDownHandler}
+                isEditingTask={this.props.isEditingTask}
+                editingTaskId={this.props.editingTaskId}
+                editedText={this.props.editedText}
+              />
+            )}
+            {this.props.showError && this.props.editingTaskId === task.id && (
+              <ErrorMessage message={this.props.textError} />
+            )}
+          </div>
         ))}
       </div>
     );
   }
-}
+}  
 
 export default TaskList;

@@ -1,7 +1,6 @@
 .task {
   display: flex;
   align-items: center;
-  width: 90%;
   min-height: 120px;
   margin: 20px 0px;
   box-shadow: 19px 20px 14px rgba(0, 0, 0, 0.14);
@@ -16,6 +15,7 @@
 .task__text {
   display: flex;
   align-items: center;
+  margin: 0px 0px 0px 10px;
   padding: 0px 0px 0px 10px;
   flex-grow: 1;
   min-height: 60px;

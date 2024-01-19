@@ -24,7 +24,7 @@ class Todo extends Component {
 
   addTask = (event) => {
     event.preventDefault();
-    this.setState({ showError : false });
+    this.setState({ showError : false, editingTaskId: null });
     const tasks = this.state.tasks;
     const validateText = validateInput(this.state.text);
     
@@ -43,33 +43,11 @@ class Todo extends Component {
     this.setState({ tasks: tasks, text: '' });
   };
 
-  handleChange = (event, key) => {
-    this.setState({[key]: event.target.value });
-  };
-
-  stopChangeMode = () => {
-    this.setState({ isEditingTask: false, editingTaskId: null });
-  };
-
-  onClickEditButton = (id, initialText) => {
-    this.setState({ isEditingTask: true, editingTaskId: id, editedText: initialText  });
-  };
-
-  onInputKeyDownHandler = (event, id) => {
-    switch (event.key) {
-      case "Escape": 
-        this.setState({ isEditingTask: false });
-        break;
-      case "Enter": 
-        this.changeTaskText(this.state.editedText, id);
-        this.setState({ isEditingTask: false });
-        break;
-    }
-  };
-
   changeTaskText = (newText, idTask) => {
+    this.setState({ showError : false });
     const validateText = validateInput(newText);
     if (!validateText) {
+      this.setState({ showError: true, textError: "Пожалуйста, введите корректные данные." });
       return;
     };
 
@@ -85,6 +63,39 @@ class Todo extends Component {
     this.setState({ tasks });
   }
 
+  handleChange = (event, key) => {
+    this.setState({[key]: event.target.value });
+  };
+
+  stopChangeMode = () => {
+    this.setState({ isEditingTask: false, editingTaskId: null });
+  };
+
+  onClickEditButton = (id, initialText) => {
+    this.setState({ isEditingTask: true, editingTaskId: id, editedText: initialText, showError : false  });
+  };
+
+  onClickEditConfir = (id) => {
+    this.changeTaskText(this.state.editedText, id);
+    this.setState({ isEditingTask: false });
+  };
+
+  onClickEditCancel = () => {
+    this.setState({ isEditingTask: false });
+  };
+
+  onInputKeyDownHandler = (event, id) => {
+    switch (event.key) {
+      case "Escape": 
+        this.setState({ isEditingTask: false });
+        break;
+      case "Enter": 
+        this.changeTaskText(this.state.editedText, id);
+        this.setState({ isEditingTask: this.state.showError });
+        break;
+    }
+  };
+
   componentDidMount() {
     localStorage.setItem('tasks', JSON.stringify(initialTodoTask));
   }
@@ -98,7 +109,7 @@ class Todo extends Component {
           text={this.state.text}
           editingTaskId={this.state.editingTaskId}
         />
-        {this.state.showError && (
+        {this.state.showError && !this.state.editingTaskId && (
           <ErrorMessage message={this.state.textError} />
         )}
         <TaskList 
@@ -107,9 +118,13 @@ class Todo extends Component {
           stopChangeMode={this.stopChangeMode} 
           onClickEditButton={this.onClickEditButton}
           onInputKeyDownHandler={this.onInputKeyDownHandler}
+          onClickEditConfir={this.onClickEditConfir}
+          onClickEditCancel={this.onClickEditCancel}
           isEditingTask={this.state.isEditingTask}
           editingTaskId={this.state.editingTaskId}
           editedText={this.state.editedText}
+          showError={this.state.showError}
+          textError={this.state.textError}
         />
       </div>
     );
