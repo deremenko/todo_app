@@ -10,7 +10,7 @@ class Task extends Component {
       <div className="task">
         <input 
           type='checkbox'
-          onChange={() => {this.props.handleChangeCheckbox(this.props.task.id)}}
+          onChange={() => {this.props.handleChangeCheckbox(this.props.index)}}
           checked = {this.props.task.completed} 
           className='task__checkbox'>
         </input>
@@ -19,7 +19,7 @@ class Task extends Component {
         </p>
         <Button 
           icon={editIcon} 
-          actionButton={() => {this.props.onClickEditButton(this.props.task.id, this.props.task.text)}} 
+          actionButton={() => {this.props.editTask(this.props.task.id, this.props.task.text)}} 
           alt="pen" 
         />
         <Button 

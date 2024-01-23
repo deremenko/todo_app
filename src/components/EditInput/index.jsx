@@ -17,12 +17,12 @@ class EditInput extends Component {
         />
         <Button 
           icon={checkMark} 
-          actionButton={() => this.props.onClickEditConfir(this.props.id)}
+          actionButton={() => this.props.confirmTaskEditing(this.props.id)}
           alt="Check mark"
         />
         <Button 
           icon={crossIcon} 
-          actionButton={() => this.props.onClickEditCancel()}
+          actionButton={() => this.props.cancelTaskEditing()}
           alt="Cross" 
         />
       </div>

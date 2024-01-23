@@ -17,7 +17,6 @@ class Todo extends Component {
       editedText: '',
       checked: false,
       showError : false,
-      isEditingTask: false,
       editingTaskId: null,
       textError: ''
     };
@@ -30,7 +29,7 @@ class Todo extends Component {
     const validateText = validateInput(this.state.text);
     
     if (!validateText) {
-      this.setState({ showError: true, textError: "Пожалуйста, введите корректные данные." });
+      this.setState({ textError: "Пожалуйста, введите корректные данные." });
       return; 
     }
 
@@ -42,14 +41,13 @@ class Todo extends Component {
 
     tasks = sortArray(tasks);
     localStorage.setItem('tasks', JSON.stringify(tasks));
-    this.setState({ tasks: tasks, text: '' });
+    this.setState({ tasks: tasks, text: '', textError: '' });
   };
 
   changeTaskText = (newText, idTask) => {
-    this.setState({ showError : false });
     const validateText = validateInput(newText);
     if (!validateText) {
-      this.setState({ showError: true, textError: "Пожалуйста, введите корректные данные." });
+      this.setState({ textError: "Пожалуйста, введите корректные данные." });
       return;
     };
 
@@ -61,13 +59,12 @@ class Todo extends Component {
       text: validateText, 
     };
 
-    localStorage.setItem('tasks', JSON.stringify(tasks)); 
-    this.setState({ tasks });
+    localStorage.setItem('tasks', JSON.stringify(tasks));
+    this.setState({ tasks, editingTaskId: null, textError: '' });
   }
 
   deleteTask = (idTask) => {
-    let tasks = [...this.state.tasks];
-    tasks = tasks.filter((task) => {
+    let tasks = this.state.tasks.filter((task) => {
       return task.id !== idTask;
     })
 
@@ -77,19 +74,18 @@ class Todo extends Component {
 
   deleteAllTask = (event) => {
     event.preventDefault();
-    let tasks = [...[]];
+    let tasks = [];
     localStorage.setItem('tasks', JSON.stringify(tasks)); 
     this.setState({ tasks });
   }
 
-  handleChangeCheckbox = (idTask) => {
+  handleChangeCheckbox = (index) => {
     let tasks = [...this.state.tasks];
-    const indexTask = tasks.findIndex(item => item.id === idTask);
-
-    tasks[indexTask] = {
-      ...tasks[indexTask], 
-      completed: !tasks[indexTask].completed, 
+    tasks[index] = {
+      ...tasks[index], 
+      completed: !tasks[index].completed, 
     };
+    
     tasks = sortArray(tasks);
     localStorage.setItem('tasks', JSON.stringify(tasks)); 
     this.setState({ tasks });
@@ -99,31 +95,25 @@ class Todo extends Component {
     this.setState({[key]: event.target.value });
   };
 
-  stopChangeMode = () => {
-    this.setState({ isEditingTask: false, editingTaskId: null });
+  editTask = (id, initialText) => {
+    this.setState({ editingTaskId: id, editedText: initialText});
   };
 
-  onClickEditButton = (id, initialText) => {
-    this.setState({ isEditingTask: true, editingTaskId: id, editedText: initialText, showError : false  });
-  };
-
-  onClickEditConfir = (id) => {
+  confirmTaskEditing = (id) => {     
     this.changeTaskText(this.state.editedText, id);
-    this.setState({ isEditingTask: false });
   };
 
-  onClickEditCancel = () => {
-    this.setState({ isEditingTask: false });
+  cancelTaskEditing = () => {
+    this.setState({ editingTaskId: null });
   };
 
   onInputKeyDownHandler = (event, id) => {
     switch (event.key) {
       case "Escape": 
-        this.setState({ isEditingTask: false });
+        this.setState({ editingTaskId: null });
         break;
       case "Enter": 
         this.changeTaskText(this.state.editedText, id);
-        this.setState({ isEditingTask: this.state.showError });
         break;
     }
   };
@@ -144,7 +134,7 @@ class Todo extends Component {
           text={this.state.text}
           editingTaskId={this.state.editingTaskId}
         />
-        {this.state.showError && !this.state.editingTaskId && (
+        {this.state.textError && !this.state.editingTaskId && (
           <ErrorMessage message={this.state.textError} />
         )}
         <TaskList 
@@ -152,12 +142,10 @@ class Todo extends Component {
           deleteTask={this.deleteTask}
           handleChange={this.handleChange} 
           handleChangeCheckbox={this.handleChangeCheckbox} 
-          stopChangeMode={this.stopChangeMode} 
-          onClickEditButton={this.onClickEditButton}
+          editTask={this.editTask}
           onInputKeyDownHandler={this.onInputKeyDownHandler}
-          onClickEditConfir={this.onClickEditConfir}
-          onClickEditCancel={this.onClickEditCancel}
-          isEditingTask={this.state.isEditingTask}
+          confirmTaskEditing={this.confirmTaskEditing}
+          cancelTaskEditing={this.cancelTaskEditing}
           editingTaskId={this.state.editingTaskId}
           editedText={this.state.editedText}
           showError={this.state.showError}

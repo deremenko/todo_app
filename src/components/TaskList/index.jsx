@@ -8,35 +8,34 @@ class TaskList extends Component {
   render() {
     return (
       <div className="taskList">
-        {this.props.tasks.map((task) => (
+        {this.props.tasks.map((task,index) => (
           <div key={task.id} className='taskList__block'>
-            {this.props.isEditingTask && task.id === this.props.editingTaskId ? (
+            {task.id === this.props.editingTaskId ? (
               <EditInput
                 id={task.id}
                 editedText={this.props.editedText}
                 handleChange={this.props.handleChange} 
                 onInputKeyDownHandler={this.props.onInputKeyDownHandler}
-                stopChangeMode={this.props.stopChangeMode}
-                onClickEditConfir={this.props.onClickEditConfir}
-                onClickEditCancel={this.props.onClickEditCancel}
+                confirmTaskEditing={this.props.confirmTaskEditing}
+                cancelTaskEditing={this.props.cancelTaskEditing}
               />
             ) : (
               <Task 
                 key={task.id}
                 task={task}
+                index={index}
                 deleteTask={this.props.deleteTask}
                 changeTaskText={this.props.changeTaskText}
                 handleChange={this.props.handleChange} 
                 handleChangeCheckbox={this.props.handleChangeCheckbox}
-                stopChangeMode={this.props.stopChangeMode}
-                onClickEditButton={this.props.onClickEditButton}
+                editTask={this.props.editTask}
                 onInputKeyDownHandler={this.props.onInputKeyDownHandler}
                 isEditingTask={this.props.isEditingTask}
                 editingTaskId={this.props.editingTaskId}
                 editedText={this.props.editedText}
               />
             )}
-            {this.props.showError && this.props.editingTaskId === task.id && (
+            {this.props.textError && this.props.editingTaskId === task.id && (
               <ErrorMessage message={this.props.textError} />
             )}
           </div>
