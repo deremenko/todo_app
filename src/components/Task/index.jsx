@@ -9,17 +9,17 @@ class Task extends Component {
     return (
       <div className="task">
         <input 
-          type='checkbox'
-          onChange={() => {this.props.handleChangeCheckbox(this.props.index)}}
+          type="checkbox"
+          onChange={() => {this.props.handleChangeCheckbox(this.props.task.id)}}
           checked = {this.props.task.completed} 
-          className='task__checkbox'>
+          className="task__checkbox">
         </input>
-        <p className='task__text'>
+        <p className="task__text">
           {this.props.task.text}
         </p>
         <Button 
           icon={editIcon} 
-          actionButton={() => {this.props.editTask(this.props.task.id, this.props.task.text)}} 
+          actionButton={() => {this.props.launchTaskEditing(this.props.task.id, this.props.task.text)}} 
           alt="pen" 
         />
         <Button 

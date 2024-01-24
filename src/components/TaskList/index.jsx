@@ -9,7 +9,7 @@ class TaskList extends Component {
     return (
       <div className="taskList">
         {this.props.tasks.map((task,index) => (
-          <div key={task.id} className='taskList__block'>
+          <div key={task.id} className="taskList__block">
             {task.id === this.props.editingTaskId ? (
               <EditInput
                 id={task.id}
@@ -28,11 +28,9 @@ class TaskList extends Component {
                 changeTaskText={this.props.changeTaskText}
                 handleChange={this.props.handleChange} 
                 handleChangeCheckbox={this.props.handleChangeCheckbox}
-                editTask={this.props.editTask}
+                launchTaskEditing={this.props.launchTaskEditing}
                 onInputKeyDownHandler={this.props.onInputKeyDownHandler}
-                isEditingTask={this.props.isEditingTask}
                 editingTaskId={this.props.editingTaskId}
-                editedText={this.props.editedText}
               />
             )}
             {this.props.textError && this.props.editingTaskId === task.id && (

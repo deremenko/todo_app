@@ -7,9 +7,9 @@ import './styles.css';
 class EditInput extends Component {
   render() {
     return (
-      <div className='editInput'>
+      <div className="editInput">
         <input
-          className='editInput__inputLine'
+          className="editInput__inputLine"
           type="text"
           value={this.props.editedText}
           onChange={(event) => {this.props.handleChange(event, "editedText")}}
@@ -22,7 +22,7 @@ class EditInput extends Component {
         />
         <Button 
           icon={crossIcon} 
-          actionButton={() => this.props.cancelTaskEditing()}
+          actionButton={this.props.cancelTaskEditing}
           alt="Cross" 
         />
       </div>

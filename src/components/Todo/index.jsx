@@ -44,7 +44,7 @@ class Todo extends Component {
     this.setState({ tasks: tasks, text: '', textError: '' });
   };
 
-  changeTaskText = (newText, idTask) => {
+  updateTaskText = (newText, idTask) => {
     const validateText = validateInput(newText);
     if (!validateText) {
       this.setState({ textError: "Пожалуйста, введите корректные данные." });
@@ -64,7 +64,7 @@ class Todo extends Component {
   }
 
   deleteTask = (idTask) => {
-    let tasks = this.state.tasks.filter((task) => {
+    const tasks = this.state.tasks.filter((task) => {
       return task.id !== idTask;
     })
 
@@ -74,16 +74,16 @@ class Todo extends Component {
 
   deleteAllTask = (event) => {
     event.preventDefault();
-    let tasks = [];
-    localStorage.setItem('tasks', JSON.stringify(tasks)); 
-    this.setState({ tasks });
+    localStorage.setItem('tasks', JSON.stringify([])); 
+    this.setState({ tasks: [] });
   }
 
-  handleChangeCheckbox = (index) => {
+  handleChangeCheckbox = (idTask) => {
     let tasks = [...this.state.tasks];
-    tasks[index] = {
-      ...tasks[index], 
-      completed: !tasks[index].completed, 
+    const indexTask = tasks.findIndex(item => item.id === idTask);
+    tasks[indexTask] = {
+      ...tasks[indexTask], 
+      completed: !tasks[indexTask].completed, 
     };
     
     tasks = sortArray(tasks);
@@ -95,16 +95,17 @@ class Todo extends Component {
     this.setState({[key]: event.target.value });
   };
 
-  editTask = (id, initialText) => {
-    this.setState({ editingTaskId: id, editedText: initialText});
+  launchTaskEditing = (id, initialText) => {
+    this.setState({ editingTaskId: id, editedText: initialText, textError: ''});
   };
 
   confirmTaskEditing = (id) => {     
-    this.changeTaskText(this.state.editedText, id);
+    this.updateTaskText(this.state.editedText, id);
   };
 
   cancelTaskEditing = () => {
     this.setState({ editingTaskId: null });
+    this.setState({ textError: '' });
   };
 
   onInputKeyDownHandler = (event, id) => {
@@ -113,7 +114,7 @@ class Todo extends Component {
         this.setState({ editingTaskId: null });
         break;
       case "Enter": 
-        this.changeTaskText(this.state.editedText, id);
+        this.updateTaskText(this.state.editedText, id);
         break;
     }
   };
@@ -142,13 +143,12 @@ class Todo extends Component {
           deleteTask={this.deleteTask}
           handleChange={this.handleChange} 
           handleChangeCheckbox={this.handleChangeCheckbox} 
-          editTask={this.editTask}
+          launchTaskEditing={this.launchTaskEditing}
           onInputKeyDownHandler={this.onInputKeyDownHandler}
           confirmTaskEditing={this.confirmTaskEditing}
           cancelTaskEditing={this.cancelTaskEditing}
           editingTaskId={this.state.editingTaskId}
           editedText={this.state.editedText}
-          showError={this.state.showError}
           textError={this.state.textError}
         />
       </div>
