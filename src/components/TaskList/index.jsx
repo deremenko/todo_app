@@ -1,13 +1,23 @@
 import React, { Component } from 'react';
 import Task from '../Task';
 import EditInput from '../EditInput';
+import Button from '../Button';
 import ErrorMessage from '../ErrorMessage';
+import crossIcon from '../../svg/Cross.svg';
 import './styles.css';
 
 class TaskList extends Component {
   render() {
     return (
       <div className="taskList">
+        <div className="taskList__deletAllTasksBlock">
+          <p>All Delete Tasks</p>
+          <Button 
+            icon={crossIcon} 
+            actionButton={this.props.deleteAllTask} 
+            alt="Cross"
+          />
+        </div>
         {this.props.tasks.map((task,index) => (
           <div key={task.id} className="taskList__block">
             {task.id === this.props.editingTaskId ? (
