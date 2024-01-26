@@ -11,7 +11,7 @@ class TaskList extends Component {
       <div className="taskList">
         <div className="taskList__deletAllTasksBlock">
           <Button 
-            buttonText={"All Delete"}
+            buttonText="All Delete"
             actionButton={this.props.deleteAllTask} 
           />
         </div>
