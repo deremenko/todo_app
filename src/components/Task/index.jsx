@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Button from '../Button';
 import crossIcon from '../../svg/Cross.svg';
+import editIcon from '../../svg/Edit.svg';
 import './styles.css';
 
 class Task extends Component {
@@ -8,12 +9,24 @@ class Task extends Component {
     return (
       <div className="task">
         <input 
-          type="checkbox" 
-          checked={this.props.checked} 
-          className="task__checkbox" 
+          type="checkbox"
+          onChange={() => {this.props.handleChangeCheckbox(this.props.task.id)}}
+          checked = {this.props.task.completed} 
+          className="task__checkbox">
+        </input>
+        <p className="task__text">
+          {this.props.task.text}
+        </p>
+        <Button 
+          icon={editIcon} 
+          actionButton={() => {this.props.launchTaskEditing(this.props.task.id, this.props.task.text)}} 
+          alt="pen" 
         />
-        <p className="task__text" > {this.props.text} </p>
-        <Button icon={crossIcon} alt="Cross" />
+        <Button 
+          icon={crossIcon} 
+          actionButton={() => {this.props.deleteTask(this.props.task.id)}}
+          alt="Cross" 
+        />
       </div>
     );
   }

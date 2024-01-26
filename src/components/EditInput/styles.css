@@ -1,6 +1,7 @@
-.task {
+.editInput {
   display: flex;
   align-items: center;
+  width: 90%;
   min-height: 120px;
   margin: 20px 0px;
   box-shadow: 19px 20px 14px rgba(0, 0, 0, 0.14);
@@ -8,27 +9,11 @@
   transition: box-shadow 0.5s ease;
 }
 
-.task:hover {
-  box-shadow: 19px 20px 14px rgba(0, 0, 0, 0.527);
-}
-
-.task__text {
+.editInput__inputLine {
   display: flex;
   align-items: center;
   margin: 0px 0px 0px 10px;
   padding: 0px 0px 0px 10px;
   flex-grow: 1;
   min-height: 60px;
-  word-wrap: break-word;
-  word-break:break-all;
-}
-
-.task__text:hover {
-  box-shadow: 19px 20px 14px rgba(0, 0, 0, 0.527);
-  border: 1px solid rgba(0, 0, 0, 0.14);
-}
-
-.task__checkbox {
-  width: 5%;
-  margin: 0px 10px 0px 0px;
 }
