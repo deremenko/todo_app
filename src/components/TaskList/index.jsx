@@ -3,7 +3,6 @@ import Task from '../Task';
 import EditInput from '../EditInput';
 import Button from '../Button';
 import ErrorMessage from '../ErrorMessage';
-import crossIcon from '../../svg/Cross.svg';
 import './styles.css';
 
 class TaskList extends Component {
@@ -11,11 +10,9 @@ class TaskList extends Component {
     return (
       <div className="taskList">
         <div className="taskList__deletAllTasksBlock">
-          <p>All Delete Tasks</p>
           <Button 
-            icon={crossIcon} 
+            buttonText={"All Delete"}
             actionButton={this.props.deleteAllTask} 
-            alt="Cross"
           />
         </div>
         {this.props.tasks.map((task,index) => (
